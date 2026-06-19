@@ -18,11 +18,13 @@ typedef float NUMEROFLOTANTE;
 
 void mostrarAlumno( Alumno *a);
 
+void saveFile(Alumno *a, int size);
+
 int main(void) {
      
     NUMEROFLOTANTE test = 1.0;
     Alumno estudiantes[2];
-    Alumno a1;
+    int size =  sizeof(estudiantes) / sizeof(estudiantes[0]);
     strcpy(estudiantes[0].nombre, "Jose");
     strcpy(estudiantes[0].direccion.callePrincipal, "Av. Siempre viva");
     estudiantes[0].direccion.numeroCasa = 123;
@@ -37,6 +39,7 @@ int main(void) {
 
    
             mostrarAlumno(estudiantes);
+            saveFile(estudiantes, size);
 
    
    
@@ -54,6 +57,25 @@ for (int i = 0; i < 2; i++)
     printf("Numero de Casa: %d\n", a[i].direccion.numeroCasa);
     printf("Calle secundaria: %s\n", a[i].direccion.calleSecundaria);
 }
+ 
+}
 
-  
+void saveFile(Alumno *a, int size ) {
+    FILE *File = fopen("Alumno.txt", "w");
+    
+    for (int i = 0; i < size; i++)
+    { 
+           fprintf(File, "Nombre: %s\n", a[i].nombre);
+           fprintf(File, "Edad: %d\n", a[i].edad);
+        fprintf(File, "Direccion: %s, No. %d, %s\n", 
+                a[i].direccion.callePrincipal, 
+                a[i].direccion.numeroCasa, 
+                a[i].direccion.calleSecundaria);
+        fprintf(File, "-------------------------\n");
+    }
+    
+
+
+    fclose(File);
+    printf("\n[Datos guardados en Alumno.txt con exito]\n");
 }
