@@ -43,8 +43,9 @@ int main(void) {
 
    
             //mostrarAlumno(estudiantes);
-            saveFile(estudiantes, size);
-            readFile();
+            //saveFile(estudiantes, size);
+            //readFile();
+            readFileCSV();
 
    
    
@@ -117,24 +118,28 @@ void readFile(){
    
 }
 
-void readFileCSV(){
-    FILE *File = ("Alumno.csv", "r");
+    void readFileCSV(){
+       FILE *File = fopen("Alumno.csv", "r");
     if (File == NULL)
     {
         puts("No se encontro el archivo");
         return;
     }
-   
-    Alumno alumno;
-    fscanf(File,"%49[^;];%49[^;];%49[^;];%d;%d", 
-        alumno.nombre,
-        alumno.direccion.callePrincipal,
-        alumno.direccion.calleSecundaria,
-        alumno.direccion.numeroCasa,
-        alumno.edad
-    );
 
+    Alumno alumno;
+    
+   
+    while(fscanf(File, "%49[^;];%d;%49[^;];%d;%49[^\n]\n", 
+        alumno.nombre,
+        &alumno.edad,
+        alumno.direccion.callePrincipal,
+        &alumno.direccion.numeroCasa,
+        alumno.direccion.calleSecundaria) == 5) {
+        
+        // Imprime el alumno para comprobar que sí lee
+        printf("Alumno leido: %s, Edad: %d\n", alumno.nombre, alumno.edad);
+    }
 
     fclose(File);
-    
-}
+        
+    }
