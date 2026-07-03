@@ -1,0 +1,8 @@
+Nombre: Jose
+Edad: 20
+Direccion: Av. Siempre viva, No. 123, Av. Florida
+-------------------------
+Nombre: Maria
+Edad: 22
+Direccion: Calle Central, No. 456, Av. Amazonas
+-------------------------
